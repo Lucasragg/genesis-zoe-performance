@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#09060b">
+  <meta name="description" content="Dashboard de performance Meta Ads e ClickBank — Genesis ZOE">
+  <title>Genesis · ZOE Performance</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
+  <aside class="sidebar">
+    <a class="brand" href="#overview" aria-label="Genesis Dashboard">
+      <span class="brand-mark">G</span>
+      <span><strong>GENESIS</strong><small>PERFORMANCE</small></span>
+    </a>
+    <nav aria-label="Seções da dashboard">
+      <a class="nav-link active" href="#overview"><span>01</span> Visão geral</a>
+      <a class="nav-link" href="#daily"><span>02</span> Diário</a>
+      <a class="nav-link" href="#campaigns"><span>03</span> Campanhas</a>
+      <a class="nav-link" href="#adsets"><span>04</span> Conjuntos</a>
+      <a class="nav-link" href="#ads"><span>05</span> Anúncios</a>
+    </nav>
+    <div class="sidebar-foot">
+      <span class="live-dot"></span>
+      <div><strong>Dados sincronizados</strong><small id="sync-date">Carregando…</small></div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">ZOE · META ADS + CLICKBANK</p>
+        <h1>Performance de aquisição</h1>
+      </div>
+      <div class="header-actions">
+        <div class="period-pill"><span>Período</span><strong id="period-label">—</strong></div>
+        <button id="refresh-button" type="button" title="Recarregar dados">↻</button>
+      </div>
+    </header>
+
+    <section id="overview" class="panel-section hero-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">FUNIL COMPLETO</p><h2>Resultado geral</h2></div>
+        <span class="status-badge"><i></i><span id="coverage-badge">—</span> atribuído</span>
+      </div>
+
+      <div class="kpi-grid">
+        <article class="kpi kpi-primary">
+          <div class="kpi-icon">↗</div>
+          <p>Investimento</p><strong id="kpi-spend">—</strong>
+          <small>Meta Ads · USD</small>
+        </article>
+        <article class="kpi kpi-yellow">
+          <div class="kpi-icon">✓</div>
+          <p>Vendas atribuídas</p><strong id="kpi-sales">—</strong>
+          <small id="kpi-total-sales">— vendas totais</small>
+        </article>
+        <article class="kpi kpi-revenue">
+          <div class="kpi-icon">$</div>
+          <p>Faturamento atribuído</p><strong id="kpi-revenue">—</strong>
+          <small>Convertido para USD</small>
+        </article>
+        <article class="kpi">
+          <div class="kpi-icon">◎</div>
+          <p>CAC</p><strong id="kpi-cac">—</strong>
+          <small>Investimento / venda</small>
+        </article>
+        <article class="kpi">
+          <div class="kpi-icon">◆</div>
+          <p>Ticket médio</p><strong id="kpi-ticket">—</strong>
+          <small>Receita / venda</small>
+        </article>
+        <article class="kpi kpi-roas">
+          <div class="kpi-icon">×</div>
+          <p>ROAS</p><strong id="kpi-roas">—</strong>
+          <small>Receita / investimento</small>
+        </article>
+      </div>
+
+      <div class="funnel-grid">
+        <article class="metric-card"><span>Impressões</span><strong id="metric-impressions">—</strong><small id="metric-cpm">— CPM</small></article>
+        <div class="funnel-arrow">→</div>
+        <article class="metric-card"><span>Cliques no link</span><strong id="metric-clicks">—</strong><small id="metric-ctr">— CTR</small></article>
+        <div class="funnel-arrow">→</div>
+        <article class="metric-card"><span>Landing page views</span><strong id="metric-lpv">—</strong><small id="metric-connect">— connect rate</small></article>
+        <div class="funnel-arrow">→</div>
+        <article class="metric-card"><span>Checkouts iniciados</span><strong id="metric-checkouts">—</strong><small id="metric-checkout-rate">— avanço</small></article>
+        <div class="funnel-arrow">→</div>
+        <article class="metric-card metric-card-final"><span>Vendas</span><strong id="metric-sales">—</strong><small id="metric-conversion">— conversão</small></article>
+      </div>
+    </section>
+
+    <section id="daily" class="panel-section">
+      <div class="section-heading">
+        <div><p class="eyebrow">EVOLUÇÃO</p><h2>Resultados por dia</h2></div>
+        <div class="legend"><span><i class="bar-key"></i>Receita</span><span><i class="line-key"></i>Investimento</span></div>
+      </div>
+      <div class="chart-shell">
+        <div id="daily-chart" class="chart" role="img" aria-label="Receita e investimento por dia"></div>
+      </div>
+      <div class="table-shell daily-table-shell">
+        <table>
+          <thead><tr><th>Dia</th><th>Investimento</th><th>CPM</th><th>CTR</th><th>Checkouts</th><th>Vendas</th><th>CAC</th><th>Faturamento</th><th>ROAS</th></tr></thead>
+          <tbody id="daily-table"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="campaigns" class="panel-section entity-section">
+      <div class="section-heading"><div><p class="eyebrow">AQUISIÇÃO</p><h2>Campanhas</h2></div><span class="count-badge" id="campaign-count">—</span></div>
+      <div class="table-shell"><table><thead><tr><th>Campaign name</th><th>Investimento</th><th>Impressões</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="campaign-table"></tbody></table></div>
+    </section>
+
+    <section id="adsets" class="panel-section entity-section">
+      <div class="section-heading"><div><p class="eyebrow">SEGMENTAÇÃO</p><h2>Conjuntos de anúncios</h2></div><span class="count-badge" id="adset-count">—</span></div>
+      <div class="table-shell"><table><thead><tr><th>Ad set name</th><th>Campanha</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="adset-table"></tbody></table></div>
+    </section>
+
+    <section id="ads" class="panel-section entity-section">
+      <div class="section-heading"><div><p class="eyebrow">CRIATIVOS</p><h2>Anúncios</h2></div><span class="count-badge" id="ad-count">—</span></div>
+      <div class="table-shell"><table><thead><tr><th>Ad name</th><th>Conjunto</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="ad-table"></tbody></table></div>
+    </section>
+
+    <footer>
+      <span>GENESIS PERFORMANCE</span>
+      <span id="method-note">Atribuição por IDs do Meta Ads</span>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status"></div>
+  <script src="app.js" defer></script>
+</body>
+</html>
+
