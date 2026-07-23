@@ -251,5 +251,10 @@ $output = [ordered]@{
 
 $root = Split-Path -Parent $PSScriptRoot
 $jsonPath = Join-Path $root 'data.json'
-$output | ConvertTo-Json -Depth 10 -Compress | Set-Content -LiteralPath $jsonPath -Encoding UTF8
+$publicPath = Join-Path $root 'public'
+$publicJsonPath = Join-Path $publicPath 'data.json'
+New-Item -ItemType Directory -Force -Path $publicPath | Out-Null
+$json = $output | ConvertTo-Json -Depth 10 -Compress
+$json | Set-Content -LiteralPath $jsonPath -Encoding UTF8
+$json | Set-Content -LiteralPath $publicJsonPath -Encoding UTF8
 Write-Host "Wrote sanitized dashboard data to $jsonPath"

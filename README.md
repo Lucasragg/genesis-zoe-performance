@@ -30,13 +30,13 @@ O script:
 2. restringe o período à janela existente na base de vendas;
 3. atribui vendas e receita pelos três IDs;
 4. converte faturamento para USD;
-5. grava `data.json`.
+5. grava `data.json` para o GitHub Pages e `public/data.json` para o build Vite.
 
 As taxas de câmbio utilizadas estão registradas em `data.json` e usam como
 referência as taxas do BCE de 22 de julho de 2026.
 
 ## Publicação
 
-O projeto é composto apenas por HTML, CSS, JavaScript e `data.json`, portanto
-pode ser publicado diretamente no GitHub Pages.
+O projeto usa Vite somente como empacotador. Também pode ser publicado
+diretamente no GitHub Pages a partir da raiz.
 
