@@ -37,6 +37,7 @@ referência as taxas do BCE de 22 de julho de 2026.
 
 ## Publicação
 
-O projeto usa Vite somente como empacotador. Também pode ser publicado
-diretamente no GitHub Pages a partir da raiz.
+O build de produção gera um worker leve em `dist/server/index.js`. O mesmo
+repositório também pode ser publicado diretamente no GitHub Pages a partir da
+raiz.
 
