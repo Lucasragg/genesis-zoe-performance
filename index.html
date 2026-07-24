@@ -45,6 +45,15 @@
       </div>
     </header>
 
+    <div id="filter-bar" class="filter-bar" aria-live="polite">
+      <div class="filter-copy">
+        <span class="filter-icon">⌁</span>
+        <div><strong>Filtros cruzados</strong><small>Clique em uma linha para filtrar toda a dashboard</small></div>
+      </div>
+      <div id="filter-chips" class="filter-chips"><span class="filter-empty">Nenhum filtro ativo</span></div>
+      <button id="clear-filters" class="clear-filters" type="button" disabled>Limpar filtros</button>
+    </div>
+
     <section id="overview" class="panel-section hero-section">
       <div class="section-heading">
         <div><p class="eyebrow">FUNIL COMPLETO</p><h2>Resultado geral</h2></div>
@@ -115,17 +124,29 @@
 
     <section id="campaigns" class="panel-section entity-section">
       <div class="section-heading"><div><p class="eyebrow">AQUISIÇÃO</p><h2>Campanhas</h2></div><span class="count-badge" id="campaign-count">—</span></div>
-      <div class="table-shell"><table><thead><tr><th>Campaign name</th><th>Investimento</th><th>Impressões</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="campaign-table"></tbody></table></div>
+      <div class="table-shell entity-table-shell"><table><thead><tr><th>Campaign name</th><th>Investimento</th><th>Impressões</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="campaign-table"></tbody></table></div>
+      <div class="cpa-panel">
+        <div class="subsection-heading"><div><span>CAC POR CAMPANHA</span><small>Custo por aquisição · clique nas barras para filtrar</small></div><strong id="campaign-cpa-average">—</strong></div>
+        <div id="campaign-cpa-chart" class="cpa-chart" role="img" aria-label="Custo por aquisição das campanhas"></div>
+      </div>
     </section>
 
     <section id="adsets" class="panel-section entity-section">
       <div class="section-heading"><div><p class="eyebrow">SEGMENTAÇÃO</p><h2>Conjuntos de anúncios</h2></div><span class="count-badge" id="adset-count">—</span></div>
-      <div class="table-shell"><table><thead><tr><th>Ad set name</th><th>Campanha</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="adset-table"></tbody></table></div>
+      <div class="table-shell entity-table-shell"><table><thead><tr><th>Ad set name</th><th>Campanha</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="adset-table"></tbody></table></div>
+      <div class="cpa-panel">
+        <div class="subsection-heading"><div><span>CAC POR CONJUNTO</span><small>Custo por aquisição · clique nas barras para filtrar</small></div><strong id="adset-cpa-average">—</strong></div>
+        <div id="adset-cpa-chart" class="cpa-chart" role="img" aria-label="Custo por aquisição dos conjuntos"></div>
+      </div>
     </section>
 
     <section id="ads" class="panel-section entity-section">
       <div class="section-heading"><div><p class="eyebrow">CRIATIVOS</p><h2>Anúncios</h2></div><span class="count-badge" id="ad-count">—</span></div>
-      <div class="table-shell"><table><thead><tr><th>Ad name</th><th>Conjunto</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="ad-table"></tbody></table></div>
+      <div class="table-shell entity-table-shell"><table><thead><tr><th>Ad name</th><th>Conjunto</th><th>Investimento</th><th>CTR</th><th>Vendas</th><th>Faturamento</th><th>CAC</th><th>ROAS</th></tr></thead><tbody id="ad-table"></tbody></table></div>
+      <div class="cpa-panel">
+        <div class="subsection-heading"><div><span>CAC POR ANÚNCIO</span><small>Custo por aquisição · clique nas barras para filtrar</small></div><strong id="ad-cpa-average">—</strong></div>
+        <div id="ad-cpa-chart" class="cpa-chart" role="img" aria-label="Custo por aquisição dos anúncios"></div>
+      </div>
     </section>
 
     <footer>
@@ -138,4 +159,3 @@
   <script src="app.js" defer></script>
 </body>
 </html>
-

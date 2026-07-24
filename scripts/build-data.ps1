@@ -85,6 +85,7 @@ $campaigns = @{}
 $adsets = @{}
 $ads = @{}
 $daily = @{}
+$facts = @{}
 
 foreach ($row in $adsRows) {
     $day = [string]$row.Day
@@ -118,11 +119,23 @@ foreach ($row in $adsRows) {
         $daily[$day] = New-Rollup $day $day
         $daily[$day].date = $day
     }
+    $factKey = "$day|$campaignId|$adsetId|$adId"
+    if (-not $facts.ContainsKey($factKey)) {
+        $facts[$factKey] = New-Rollup $adId $adName
+        $facts[$factKey].date = $day
+        $facts[$factKey].campaignId = $campaignId
+        $facts[$factKey].campaignName = $campaignName
+        $facts[$factKey].adsetId = $adsetId
+        $facts[$factKey].adsetName = $adsetName
+        $facts[$factKey].adId = $adId
+        $facts[$factKey].adName = $adName
+    }
 
     Add-MediaMetrics $campaigns[$campaignId] $row
     Add-MediaMetrics $adsets[$adsetId] $row
     Add-MediaMetrics $ads[$adId] $row
     Add-MediaMetrics $daily[$day] $row
+    Add-MediaMetrics $facts[$factKey] $row
 }
 
 $trackingByReceipt = @{}
@@ -199,6 +212,20 @@ foreach ($row in $salesRows) {
     Add-SaleMetrics $adsets[$tracking.adsetId] $saleCount $revenueUsd
     Add-SaleMetrics $ads[$tracking.adId] $saleCount $revenueUsd
     Add-SaleMetrics $daily[$day] $saleCount $revenueUsd
+
+    $factKey = "$day|$($tracking.campaignId)|$($tracking.adsetId)|$($tracking.adId)"
+    if (-not $facts.ContainsKey($factKey)) {
+        $factName = [string]$adNames[$tracking.adId]
+        $facts[$factKey] = New-Rollup $tracking.adId $factName
+        $facts[$factKey].date = $day
+        $facts[$factKey].campaignId = $tracking.campaignId
+        $facts[$factKey].campaignName = [string]$campaignNames[$tracking.campaignId]
+        $facts[$factKey].adsetId = $tracking.adsetId
+        $facts[$factKey].adsetName = [string]$adsetNames[$tracking.adsetId]
+        $facts[$factKey].adId = $tracking.adId
+        $facts[$factKey].adName = $factName
+    }
+    Add-SaleMetrics $facts[$factKey] $saleCount $revenueUsd
 }
 
 $total = New-Rollup 'total' 'Total'
@@ -247,6 +274,7 @@ $output = [ordered]@{
     campaigns = @($campaigns.Values | Sort-Object { $_.spend } -Descending)
     adsets = @($adsets.Values | Sort-Object { $_.spend } -Descending)
     ads = @($ads.Values | Sort-Object { $_.spend } -Descending)
+    facts = @($facts.Values | Sort-Object { $_.date }, { $_.campaignName }, { $_.adsetName }, { $_.adName })
 }
 
 $root = Split-Path -Parent $PSScriptRoot
